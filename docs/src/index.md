@@ -25,17 +25,27 @@ Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
 
 what to write:
 	size - DONE
-	getindex
-	setindex! 
-	similar
-	getMatrix
-	tensorSize
-	productWithindex
-	tensor2tenmat
-	tenmat2tensor
+	getindex - DONE
+	setindex! - DONE
+	similar - DONE
+	ndims - DONE
+	getMatrix - DONE
+	tensorSize - DONE
+	----
+	DO THE EXAMPLES!!!
+	tensor2tenmat - DONE
+	tenmat2tensor - DONE
 
 ```@docs
 size(tenmat::Tenmat, args...)
+setindex!(tenmat::Tenmat, args...)
+getindex(tenmat::Tenmat, args...)
+similar(tenmat::Tenmat)
+ndims(tenmat::Tenmat)
+tensorSize(tenmat::Tenmat)
+getMatrix(tenmat::Tenmat)
+tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
+tenmat2tensor{T}(tenmat::Tenmat{T})
 ```
 
 ```@meta

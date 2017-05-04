@@ -1,4 +1,4 @@
-import Base: size, getindex, setindex!, similar
+import Base: size, getindex, setindex!, similar, ndims
 #' in the future: Base.show(io::IO, tenmat::Tenmat) = print(io, "...")
 
 abstract AbstractTenmat{T} # <: AbstractArray
@@ -80,25 +80,6 @@ TensorMatrices_lemon.Tenmat{Int64}([1 29 … 452 480; 505 533 … 956 984; … ;
 """
 Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int}) = tensor2tenmat(tensor, rowindex, colindex)
 
-#=
-	A = rand(4,7,6);
-	tenmat = Tenmat(A,[3,1],[2])
-	size(tenmat) == (24,7) || println("wrong")
-	size(tenmat,2) == 7 || println("wrong")
-	getindex(tenmat, 2, 6) == getindex(tenmat.matrix, 2, 6) || println("wrong")
-	setindex!(tenmat, 100.0 , 2, 6)
-	getindex(tenmat, 2, 6) == 100.0 || println("wrong")
-	similar(tenmat, Int)
-	similar(tenmat, Int, (5,2,7))
-	similar(tenmat, Int, [1,3],[2])
-	similar(tenmat, Int, [4,2,5], [1,3], (2,4,3,1,6))
-	similar(tenmat)
-	similar(tenmat, (5,2,7))
-	similar(tenmat, [1,3],[2])
-	similar(tenmat, [4,2,5], [1,3], (2,4,3,1,6))
-	
-	
-=#
 ##### define functions with macro
 # tenmat_with_other_args_non_preserving = [:size, :getindex, : setindex!
 
@@ -116,9 +97,56 @@ julia> size(tenmat,2)
 ```
 """
 size(tenmat::Tenmat, args...) = size(tenmat.matrix, args...)
-getindex(tenmat::Tenmat, args...) = getindex(tenmat.matrix, args...)
+
+"""
+	setindex!(tenmat::Tenmat, args...)
+
+Expands `setindex!` by tenmat.matrix.  
+
+```jldoctest basicMethods
+julia> setindex!(tenmat, 100, 2, 6);
+```
+"""
 setindex!(tenmat::Tenmat, args...) = setindex!(tenmat.matrix, args...)
 
+"""
+	getindex(tenmat::Tenmat, args...)
+
+Expands `getindex` by tenmat.matrix.  
+
+```jldoctest basicMethods
+julia> getindex(tenmat, 2, 6)
+100
+```
+"""
+getindex(tenmat::Tenmat, args...) = getindex(tenmat.matrix, args...)
+
+"""
+	similar
+
+similar
+
+## Examples
+
+```jldoctest
+A = rand(4,7,6)
+tenmat = Tenmat(A,[3,1],[2])
+similar(tenmat, Int)
+similar(tenmat, Int, (5,2,7))
+similar(tenmat, Int, [1,3],[2])
+similar(tenmat, Int, [4,2,5], [1,3], (2,4,3,1,6))
+similar(tenmat)
+similar(tenmat, (5,2,7))
+similar(tenmat, [1,3],[2])
+B = similar(tenmat, [4,2,5], [1,3], (2,4,3,1,6))
+size(B)
+
+# output
+
+(24,6)
+
+```
+"""
 similar{T}(tenmat::Tenmat{T}) = Tenmat{T}(similar(tenmat.matrix), tenmat.rowindex, tenmat.colindex, tenmat.tensorsize)
 similar{T}(tenmat::Tenmat{T}, S::Type) = 
 	similar(tenmat, S, tensorSize(tenmat))
@@ -136,14 +164,72 @@ similar{T}(tenmat::Tenmat{T}, rowindex::Vector{Int}, colindex::Vector{Int}, tens
 	Tenmat(similar(tenmat2tensor(tenmat), tensorsize), rowindex, colindex)
 
 
-	ndims(tenmat::Tenmat) = length(tensorSize(tenmat))
+"""
+	ndims(tenmat::Tenmat)
 
+Return the original dimension of tenmat,
+from `tensorsize`.  
+
+```jldoctest tenmat2
+A = Array(reshape(1:3024, 4,7,2,9,6)) 
+tenmat = Tenmat(A,[5,2],[3,4,1])
+ndims(tenmat)
+
+# output
+
+5
+```
+"""
+ndims(tenmat::Tenmat) = length(tensorSize(tenmat))
+
+"""
+	tensorSize(tenmat::Tenmat)
+
+Return the tensorsize.  
+
+```jldoctest tenmat2
+julia> tensorSize(tenmat)
+(4,7,2,9,6)
+```
+"""
 function tensorSize(tenmat::Tenmat)
 	return tenmat.tensorsize
 end
 
+"""
+	getMatrix(tenmat::Tenmat)
+
+Return the matrix.  
+
+```jldoctest
+A = Array(reshape(1:18, 3, 2, 3))
+tenmat = Tenmat(A,[3,1],[2])
+getMatrix(tenmat)
+
+# output
+
+9×2 Array{Int64,2}:
+  1   4
+  7  10
+ 13  16
+  2   5
+  8  11
+ 14  17
+  3   6
+  9  12
+ 15  18
+```
+"""
+function getMatrix{T}(tenmat::Tenmat{T})
+	return tenmat.matrix
+end
+
+"""
+	productWithIndex{T}(tuple::Tuple{Vararg{T}}, index = collect(1:length(tuple))::Vector{Int})
+
+Get a product of tuple elements with index number in index vector
+"""
 function productWithIndex{T}(tuple::Tuple{Vararg{T}}, index = collect(1:length(tuple))::Vector{Int})
-	# get a product of tuple elements with index number in index vector
 	prod = 1
 	for i in index
 		prod *= tuple[i]
@@ -151,9 +237,16 @@ function productWithIndex{T}(tuple::Tuple{Vararg{T}}, index = collect(1:length(t
 	return prod
 end
 
+"""
+	tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
 
+Convert tensor to tenmat.  
+
+**TO DO**
+ADD EXAMPLE
+"""
 function tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
-	"""
+	#=
 		A = rand(3,5,3,2,6);
 		tenmatA = tensor2tenmat(A,[3,5,2],[4,1])
 		=> tenmatA.matrix => 90x6 matrix
@@ -186,7 +279,7 @@ function tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex:
 		for i = 1:a, j = 1:b, k = 1:c, l = 1:d
 			println(D[i,j,k,l] == tenmatD.matrix[k,(j-1)*a*d+(l-1)*a+i])
 		end
-	"""
+	=#
 	tensorsize = size(tensor)
 	(N == length(rowindex) + length(colindex)) || error("index does not match")
 
@@ -200,8 +293,16 @@ function tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex:
 	return tenmat
 end
 
+"""
+	tenmat2tensor{T}(tenmat::Tenmat{T})
+
+Convert tenmat back to the tensor.  
+
+##TO DO**
+ADD EXAMPLE
+"""
 function tenmat2tensor{T}(tenmat::Tenmat{T})
-	"""
+	#=
 		A = rand(3,5,3,2,8);
 		tenmatA = tensor2tenmat(A,[3,5,2],[4,1])
 		againA = tenmat2tensor(tenmatA)
@@ -213,15 +314,9 @@ function tenmat2tensor{T}(tenmat::Tenmat{T})
 		for a=1:8, b=1:6, c=1:7, d=1:5, e=1:8, f=1:5, g=1:3, h=1:8
 			againB[a,b,c,d,e,f,g,h] == B[a,b,c,d,e,f,g,h] ? println("right") : println("wrong")
 		end
-	"""
+	=#
 	indices = vcat(tenmat.rowindex, tenmat.colindex)
 	tensor = reshape(tenmat.matrix, [tenmat.tensorsize[i] for i in indices]...)
 	tensor = ipermutedims(tensor, indices)
 	return tensor
-end
-
-#---
-
-function getMatrix{T}(tenmat::Tenmat{T})
-	return tenmat.matrix
 end
