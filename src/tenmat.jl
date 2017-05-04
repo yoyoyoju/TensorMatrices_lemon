@@ -7,16 +7,33 @@ abstract AbstractTenmat{T} # <: AbstractArray
 # 	and N should be the length of the tuple returned by size()
 
 """
-type Tenmat is tensor,
-which stores the information on matrix it was from.
-As well as the order of indices when it was a matrix.
+	Tenmat{T}(matrix::Array{T,2}, rowindex::Vector{Int}, colindex::Vector{Int}, tensorsize::Tuple{Vararg{Int}})
+
+
+Matrix which stores the indices to convert it back to tensor.
+
+## Example
+
+```jldoctest
+matrix = Array(reshape(1:48, 6, 8)) # some 6 x 8 matrix
+rowindex = [3,1]
+colindex = [2,4]
+tensorsize = (2,4,3,2)
+tenmat = Tenmat(matrix, rowindex, colindex, tensorsize)
+
+# output
+
+TensorMatrices_lemon.Tenmat{Int64}([1 7 … 37 43; 2 8 … 38 44; … ; 5 11 … 41 47; 6 12 … 42 48],[3,1],[2,4],(2,4,3,2))
+```
 """
 type Tenmat{T} <: AbstractTenmat{T}
-	# matrix which stores the dimension while it was a tensor
 	# e.g. Tenmat(A,[1,2],[3,4],(4,3,2,4)), where A is 12x8 matrix
+	"converted matrix from tensor"
 	matrix::Array{T,2}
-	rowindex::Vector{Int} # indices mapping to row
-	colindex::Vector{Int} # indices mapping to column
+	"Tensor indices to map to row"
+	rowindex::Vector{Int} 
+	"Tensor indices to map to coloumn"
+	colindex::Vector{Int} 
 	tensorsize::Tuple{Vararg{Int}} # tensor size
 
 	function Tenmat{T}(matrix::Array{T,2}, rowindex::Vector{Int}, colindex::Vector{Int}, tensorsize::Tuple{Vararg{Int}})
@@ -24,13 +41,6 @@ type Tenmat{T} <: AbstractTenmat{T}
 		# the dimension of the mat matches to the tensize
 		# -> the product of tensize[rowindex] == mat's row dimension
 		# -> also for the column
-		"""
-			matrix = rand(6,8)
-			rowindex = [3,1]
-			colindex = [2,4]
-			tensorsize = (2,4,3,2)
-			tenmat = Tenmat(matrix, rowindex, colindex, tensorsize)
-		"""
 		(length(rowindex) + length(colindex) == length(tensorsize)) &&
 		(productWithIndex(tensorsize, rowindex) == size(matrix, 1)) &&
 		(productWithIndex(tensorsize, colindex) == size(matrix, 2)) ?
@@ -39,16 +49,38 @@ type Tenmat{T} <: AbstractTenmat{T}
 	end
 end
 
-
 Tenmat{T}(matrix::Matrix{T}, rowindex::Vector{Int}, colindex::Vector{Int}, tensorsize::Tuple{Vararg{Int}})  = Tenmat{T}(matrix, rowindex, colindex, tensorsize)
-Tenmat{T}(matrix::Matrix{T}) = Tenmat{T}(matrix, [1], [2], size(matrix))
-Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int}) = tensor2tenmat(tensor, rowindex, colindex)
-"""
-	A = rand(4,7,2,9,6)
-	rowindex = [5,2]
-	colindex = [3,4,1]
-	tenmat = Tenmat(A,rowindex,colindex)
 
+"""
+	Tenmat{T}(matrix::Matrix{T})
+
+Set a matrix as a Tenmat. 
+"""
+Tenmat{T}(matrix::Matrix{T}) = Tenmat{T}(matrix, [1], [2], size(matrix))
+
+"""
+	Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
+
+Set a tensor as a Tenmat.  
+
+`Tenmat.matrix` will return the converted matrix.  
+
+## Example
+
+```jldoctest basicMethods
+A = Array(reshape(1:3024, 4,7,2,9,6)) # tensor, size of [4,7,2,9,6]
+rowindex = [5,2] # 5th and 2nd indices maps to the row
+colindex = [3,4,1] # 3rd, 4th and 1st indices maps to the column
+tenmat = Tenmat(A,rowindex,colindex)
+
+# output
+
+TensorMatrices_lemon.Tenmat{Int64}([1 29 … 452 480; 505 533 … 956 984; … ; 2041 2069 … 2492 2520; 2545 2573 … 2996 3024],[5,2],[3,4,1],(4,7,2,9,6))
+```
+"""
+Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int}) = tensor2tenmat(tensor, rowindex, colindex)
+
+#=
 	A = rand(4,7,6);
 	tenmat = Tenmat(A,[3,1],[2])
 	size(tenmat) == (24,7) || println("wrong")
@@ -66,9 +98,23 @@ Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int}) = 
 	similar(tenmat, [4,2,5], [1,3], (2,4,3,1,6))
 	
 	
-"""
+=#
 ##### define functions with macro
 # tenmat_with_other_args_non_preserving = [:size, :getindex, : setindex!
+
+"""
+	size(tenmat::Tenmat, args...)
+
+Return the size of the tenmat.matrix.  
+
+```jldoctest basicMethods
+julia> size(tenmat)
+(42,72)
+
+julia> size(tenmat,2)
+72
+```
+"""
 size(tenmat::Tenmat, args...) = size(tenmat.matrix, args...)
 getindex(tenmat::Tenmat, args...) = getindex(tenmat.matrix, args...)
 setindex!(tenmat::Tenmat, args...) = setindex!(tenmat.matrix, args...)
