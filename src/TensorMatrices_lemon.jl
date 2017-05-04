@@ -1,5 +1,7 @@
 module TensorMatrices_lemon
 
-# package code goes here
+	export AbstractTenmat, Tenmat, tensorSize, size, getindex, setindex!, similar, tensor2tenmat, tenmat2tensor, getMatrix
 
-end # module
+	include("tenmat.jl")
+
+end
