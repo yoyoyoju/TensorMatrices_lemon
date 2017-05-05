@@ -242,44 +242,53 @@ end
 
 Convert tensor to tenmat.  
 
-**TO DO**
-ADD EXAMPLE
+## examples 
+
+```jldoctest
+julia> A = rand(3,5,3,2,6);
+
+julia> tenmatA = tensor2tenmat(A,[3,5,2],[4,1]);
+
+julia> size(getMatrix(tenmatA))
+(90,6)
+
+julia> tensorSize(tenmatA)
+(3,5,3,2,6)
+
+
+julia> B = Array(reshape(1:10,2,5));
+
+julia> tenmatB = tensor2tenmat(B,[2],[1]);
+
+julia> tenmatB.matrix == transpose(B)
+true
+
+julia> tensorSize(tenmatB)
+(2,5)
+
+```
 """
 function tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
-	#=
-		A = rand(3,5,3,2,6);
-		tenmatA = tensor2tenmat(A,[3,5,2],[4,1])
-		=> tenmatA.matrix => 90x6 matrix
-		=> tenmatA.tensorsize => (3,5,3,2,6)
+#=
+julia> a = 5; b = 7; c = 8;
+julia> D = reshape(1:a*b*c,a,b,c)
+julia> tenmatD = tensor2tenmat(D,[3],[1,2])
+julia> tenmatD.tensorsize == (a,b,c)
+julia> size(tenmatD.matrix) == (c,a*b)
+julia> for i = 1:a, j = 1:b, k = 1:c
+julia> 	println(D[i,j,k] == tenmatD.matrix[k,(j-1)*a+i])
+julia> end
+julia> 
+julia> a = 5; b = 7; c = 8; d = 11
+julia> D = reshape(1:a*b*c*d,a,b,c,d)
+julia> tenmatD = tensor2tenmat(D,[3],[1,4,2])
+julia> tenmatD.tensorsize == (a,b,c,d)
+julia> size(tenmatD.matrix) == (c,a*d*b)
+julia> for i = 1:a, j = 1:b, k = 1:c, l = 1:d
+julia> 	println(D[i,j,k,l] == tenmatD.matrix[k,(j-1)*a*d+(l-1)*a+i])
+julia> end
 
-		B = reshape(1:10,2,5)
-		tenmatB = tensor2tenmat(B,[2],[1])
-		tenmatB.matrix == transpose(B)
-		tenmatB.tensorsize == (2,5)
-
-		C = reshape(1:30,3,2,5)
-		tenmatC = tensor2tenmat(C,[3],[2,1])
-		tenmatC.tensorsize == (3,2,5)
-		size(tenmatC.matrix) == (5,6)
-
-		a = 5; b = 7; c = 8
-		D = reshape(1:a*b*c,a,b,c)
-		tenmatD = tensor2tenmat(D,[3],[1,2])
-		tenmatD.tensorsize == (a,b,c)
-		size(tenmatD.matrix) == (c,a*b)
-		for i = 1:a, j = 1:b, k = 1:c
-			println(D[i,j,k] == tenmatD.matrix[k,(j-1)*a+i])
-		end
-
-		a = 5; b = 7; c = 8; d = 11
-		D = reshape(1:a*b*c*d,a,b,c,d)
-		tenmatD = tensor2tenmat(D,[3],[1,4,2])
-		tenmatD.tensorsize == (a,b,c,d)
-		size(tenmatD.matrix) == (c,a*d*b)
-		for i = 1:a, j = 1:b, k = 1:c, l = 1:d
-			println(D[i,j,k,l] == tenmatD.matrix[k,(j-1)*a*d+(l-1)*a+i])
-		end
-	=#
+=#
 	tensorsize = size(tensor)
 	(N == length(rowindex) + length(colindex)) || error("index does not match")
 
@@ -298,23 +307,34 @@ end
 
 Convert tenmat back to the tensor.  
 
-##TO DO**
-ADD EXAMPLE
+## examples
+```jldoctest
+julia> A = rand(3,5,3,2,8);
+
+julia> tenmatA = tensor2tenmat(A,[3,5,2],[4,1]);
+
+julia> back2A = tenmat2tensor(tenmatA);
+
+julia> A == back2A
+true
+```
+
+```jldoctest
+B = rand(8,6,7,5,8,5,3,8)
+tenmatB = tensor2tenmat(B,[1,7,3,2,6],[5,8,4])
+back2B = tenmat2tensor(tenmatB)
+check = true
+for a=1:8, b=1:6, c=1:7, d=1:5, e=1:8, f=1:5, g=1:3, h=1:8
+	back2B[a,b,c,d,e,f,g,h] == B[a,b,c,d,e,f,g,h] || check * false
+end
+check
+
+# output
+
+true
+```
 """
 function tenmat2tensor{T}(tenmat::Tenmat{T})
-	#=
-		A = rand(3,5,3,2,8);
-		tenmatA = tensor2tenmat(A,[3,5,2],[4,1])
-		againA = tenmat2tensor(tenmatA)
-		A == againA
-
-		B = rand(8,6,7,5,8,5,3,8);
-		tenmatB = tensor2tenmat(B,[1,7,3,2,6],[5,8,4]);
-		againB = tenmat2tensor(tenmatB);
-		for a=1:8, b=1:6, c=1:7, d=1:5, e=1:8, f=1:5, g=1:3, h=1:8
-			againB[a,b,c,d,e,f,g,h] == B[a,b,c,d,e,f,g,h] ? println("right") : println("wrong")
-		end
-	=#
 	indices = vcat(tenmat.rowindex, tenmat.colindex)
 	tensor = reshape(tenmat.matrix, [tenmat.tensorsize[i] for i in indices]...)
 	tensor = ipermutedims(tensor, indices)
