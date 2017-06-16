@@ -11,9 +11,7 @@ env:
   - DOCUMENTER_DEBUG=true
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia -e 'Pkg.clone(pwd()); Pkg.build("TensorMatrices_lemon"); Pkg.test("TensorMatrices_lemon"; coverage=true)'
-  - julia -e 'Pkg.update()'
-  - julia -e 'Pkg.add("TensorMatrices_lemon")'
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("TensorMatrices_lemon"); Pkg.test("TensorMatrices_lemon"; coverage=true)'
 after_success:
   - julia -e 'Pkg.add("Documenter")'
   - julia -e 'cd(Pkg.dir("TensorMatrices_lemon")); include(joinpath("docs", "make.jl"))'
