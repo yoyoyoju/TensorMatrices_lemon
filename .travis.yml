@@ -12,6 +12,7 @@ env:
 script:
 #  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 #  - julia -e 'Pkg.clone(pwd()); Pkg.build("TensorMatrices_lemon"); Pkg.test("TensorMatrices_lemon"; coverage=true)'
+  - julia -e 'Pkg.update()'
   - julia -e 'Pkg.add("TensorMatrices_lemon")'
 after_success:
   - julia -e 'Pkg.add("Documenter")'
