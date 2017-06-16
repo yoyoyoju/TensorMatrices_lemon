@@ -106,11 +106,11 @@
               
                 <p><a id='TensorMatrices_lemon-Module-1'></a></p>
 <h1 id="tensormatrices_lemon-module">TensorMatrices_lemon Module</h1>
-<p><a href="https://yoyoyoju.github.io/TensorMatricex_lemon.jl/latest">pages</a></p>
+<p><a href="https://yoyoyoju.github.io/TensorMatrices_lemon/latest">pages</a></p>
 <p><a id='TensorMatrices_lemon' href='#TensorMatrices_lemon'>#</a>
 <strong><code>TensorMatrices_lemon</code></strong> &mdash; <em>Module</em>.</p>
 <p>convert tensor to matrix or matrix to tensor storing the index info</p>
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/TensorMatrices_lemon.jl#L1-L4' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/TensorMatrices_lemon.jl#L1-L4' class='documenter-source'>source</a><br></p>
 <ul>
 <li><a href=".#TensorMatrices_lemon-Module-1">TensorMatrices_lemon Module</a><ul>
 <li><a href=".#Types-1">Types</a></li>
@@ -139,14 +139,14 @@ tenmat = Tenmat(matrix, rowindex, colindex, tensorsize)
 TensorMatrices_lemon.Tenmat{Int64}([1 7 … 37 43; 2 8 … 38 44; … ; 5 11 … 41 47; 6 12 … 42 48],[3,1],[2,4],(2,4,3,2))
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L9-L28' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L9-L28' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}' href='#TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}'>#</a>
 <strong><code>TensorMatrices_lemon.Tenmat</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>Tenmat{T}(matrix::Matrix{T})
 </code></pre>
 
 <p>Set a matrix as a Tenmat. </p>
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L54-L58' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L54-L58' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}' href='#TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}'>#</a>
 <strong><code>TensorMatrices_lemon.Tenmat</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
@@ -165,7 +165,7 @@ tenmat = Tenmat(A,rowindex,colindex)
 TensorMatrices_lemon.Tenmat{Int64}([1 29 … 452 480; 505 533 … 956 984; … ; 2041 2069 … 2492 2520; 2545 2573 … 2996 3024],[5,2],[3,4,1],(4,7,2,9,6))
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L61-L80' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L61-L80' class='documenter-source'>source</a><br></p>
 <p><a id='Methods-1'></a></p>
 <h2 id="methods">Methods</h2>
 <p>what to write:  size - DONE     getindex - DONE     setindex! - DONE    similar - DONE  ndims - DONE    getMatrix - DONE    tensorSize - DONE   ––  DO THE EXAMPLES!!!  tensor2tenmat - DONE    tenmat2tensor - DONE</p>
@@ -182,7 +182,7 @@ julia&gt; size(tenmat,2)
 72
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L86-L98' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L86-L98' class='documenter-source'>source</a><br></p>
 <p><a id='Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}' href='#Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}'>#</a>
 <strong><code>Base.setindex!</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>setindex!(tenmat::Tenmat, args...)
@@ -192,7 +192,7 @@ julia&gt; size(tenmat,2)
 <pre><code class="julia-repl">julia&gt; setindex!(tenmat, 100, 2, 6);
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L101-L109' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L101-L109' class='documenter-source'>source</a><br></p>
 <p><a id='Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}' href='#Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}'>#</a>
 <strong><code>Base.getindex</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>getindex(tenmat::Tenmat, args...)
@@ -203,7 +203,7 @@ julia&gt; size(tenmat,2)
 100
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L112-L121' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L112-L121' class='documenter-source'>source</a><br></p>
 <p><a id='Base.similar-Tuple{TensorMatrices_lemon.Tenmat}' href='#Base.similar-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
 <strong><code>Base.similar</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>similar
@@ -229,7 +229,7 @@ size(B)
 
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L124-L149' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L124-L149' class='documenter-source'>source</a><br></p>
 <p><a id='Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}' href='#Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
 <strong><code>Base.ndims</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>ndims(tenmat::Tenmat)
@@ -245,7 +245,7 @@ ndims(tenmat)
 5
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L167-L182' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L167-L182' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.tensorSize-Tuple{TensorMatrices_lemon.Tenmat}' href='#TensorMatrices_lemon.tensorSize-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
 <strong><code>TensorMatrices_lemon.tensorSize</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>tensorSize(tenmat::Tenmat)
@@ -256,7 +256,7 @@ ndims(tenmat)
 (4,7,2,9,6)
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L185-L194' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L185-L194' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.getMatrix-Tuple{TensorMatrices_lemon.Tenmat}' href='#TensorMatrices_lemon.getMatrix-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
 <strong><code>TensorMatrices_lemon.getMatrix</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>getMatrix(tenmat::Tenmat)
@@ -281,7 +281,7 @@ getMatrix(tenmat)
  15  18
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L199-L222' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L199-L222' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.tensor2tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}' href='#TensorMatrices_lemon.tensor2tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}'>#</a>
 <strong><code>TensorMatrices_lemon.tensor2tenmat</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
@@ -312,7 +312,7 @@ julia&gt; tensorSize(tenmatB)
 
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L240-L270' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L240-L270' class='documenter-source'>source</a><br></p>
 <p><a id='TensorMatrices_lemon.tenmat2tensor-Tuple{TensorMatrices_lemon.Tenmat{T}}' href='#TensorMatrices_lemon.tenmat2tensor-Tuple{TensorMatrices_lemon.Tenmat{T}}'>#</a>
 <strong><code>TensorMatrices_lemon.tenmat2tensor</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>tenmat2tensor{T}(tenmat::Tenmat{T})
@@ -344,14 +344,14 @@ check
 true
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L305-L336' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/2a89e10f3f8b646f1c880e4de7c653af12c381d5/src/tenmat.jl#L305-L336' class='documenter-source'>source</a><br></p>
 <p><a id='index-1'></a></p>
 <h2 id="index">index</h2>
 <ul>
 <li><a href=".#TensorMatrices_lemon"><code>TensorMatrices_lemon</code></a></li>
 <li><a href=".#TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}"><code>TensorMatrices_lemon.Tenmat</code></a></li>
-<li><a href=".#TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}"><code>TensorMatrices_lemon.Tenmat</code></a></li>
 <li><a href=".#TensorMatrices_lemon.Tenmat"><code>TensorMatrices_lemon.Tenmat</code></a></li>
+<li><a href=".#TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}"><code>TensorMatrices_lemon.Tenmat</code></a></li>
 <li><a href=".#Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}"><code>Base.getindex</code></a></li>
 <li><a href=".#Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}"><code>Base.ndims</code></a></li>
 <li><a href=".#Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}"><code>Base.setindex!</code></a></li>
@@ -403,5 +403,5 @@ true
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-06-16 15:51:06
+Build Date UTC : 2017-06-16 21:09:34
 -->
