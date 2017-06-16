@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Description...">
+  <meta name="author" content="yoyoyoju">
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - TensorMatrices_lemon.jl</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  <link href="./assets/Documenter.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> TensorMatrices_lemon.jl</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#tensormatrices_lemon-module">TensorMatrices_lemon Module</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#types">Types</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+            <li><a class="toctree-l3" href="#index">index</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">TensorMatrices_lemon.jl</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/yoyoyoju/TensorMatrices_lemon/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><a id='TensorMatrices_lemon-Module-1'></a></p>
+<h1 id="tensormatrices_lemon-module">TensorMatrices_lemon Module</h1>
+<p><a href="https://yoyoyoju.github.io/TensorMatricex_lemon.jl/latest">pages</a></p>
+<p><a id='TensorMatrices_lemon' href='#TensorMatrices_lemon'>#</a>
+<strong><code>TensorMatrices_lemon</code></strong> &mdash; <em>Module</em>.</p>
+<p>convert tensor to matrix or matrix to tensor storing the index info</p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/TensorMatrices_lemon.jl#L1-L4' class='documenter-source'>source</a><br></p>
+<ul>
+<li><a href=".#TensorMatrices_lemon-Module-1">TensorMatrices_lemon Module</a><ul>
+<li><a href=".#Types-1">Types</a></li>
+<li><a href=".#Methods-1">Methods</a></li>
+<li><a href=".#index-1">index</a></li>
+</ul>
+</li>
+</ul>
+<p><a id='Types-1'></a></p>
+<h2 id="types">Types</h2>
+<p><a id='TensorMatrices_lemon.Tenmat' href='#TensorMatrices_lemon.Tenmat'>#</a>
+<strong><code>TensorMatrices_lemon.Tenmat</code></strong> &mdash; <em>Type</em>.</p>
+<pre><code>Tenmat{T}(matrix::Array{T,2}, rowindex::Vector{Int}, colindex::Vector{Int}, tensorsize::Tuple{Vararg{Int}})
+</code></pre>
+
+<p>Matrix which stores the indices to convert it back to tensor.</p>
+<p><strong>Example</strong></p>
+<pre><code class="julia">matrix = Array(reshape(1:48, 6, 8)) # some 6 x 8 matrix
+rowindex = [3,1]
+colindex = [2,4]
+tensorsize = (2,4,3,2)
+tenmat = Tenmat(matrix, rowindex, colindex, tensorsize)
+
+# output
+
+TensorMatrices_lemon.Tenmat{Int64}([1 7 … 37 43; 2 8 … 38 44; … ; 5 11 … 41 47; 6 12 … 42 48],[3,1],[2,4],(2,4,3,2))
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L9-L28' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}' href='#TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}'>#</a>
+<strong><code>TensorMatrices_lemon.Tenmat</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>Tenmat{T}(matrix::Matrix{T})
+</code></pre>
+
+<p>Set a matrix as a Tenmat. </p>
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L54-L58' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}' href='#TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}'>#</a>
+<strong><code>TensorMatrices_lemon.Tenmat</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>Tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
+</code></pre>
+
+<p>Set a tensor as a Tenmat.  </p>
+<p><code>Tenmat.matrix</code> will return the converted matrix.  </p>
+<p><strong>Example</strong></p>
+<pre><code class="julia">A = Array(reshape(1:3024, 4,7,2,9,6)) # tensor, size of [4,7,2,9,6]
+rowindex = [5,2] # 5th and 2nd indices maps to the row
+colindex = [3,4,1] # 3rd, 4th and 1st indices maps to the column
+tenmat = Tenmat(A,rowindex,colindex)
+
+# output
+
+TensorMatrices_lemon.Tenmat{Int64}([1 29 … 452 480; 505 533 … 956 984; … ; 2041 2069 … 2492 2520; 2545 2573 … 2996 3024],[5,2],[3,4,1],(4,7,2,9,6))
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L61-L80' class='documenter-source'>source</a><br></p>
+<p><a id='Methods-1'></a></p>
+<h2 id="methods">Methods</h2>
+<p>what to write:  size - DONE     getindex - DONE     setindex! - DONE    similar - DONE  ndims - DONE    getMatrix - DONE    tensorSize - DONE   ––  DO THE EXAMPLES!!!  tensor2tenmat - DONE    tenmat2tensor - DONE</p>
+<p><a id='Base.size-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}' href='#Base.size-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}'>#</a>
+<strong><code>Base.size</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>size(tenmat::Tenmat, args...)
+</code></pre>
+
+<p>Return the size of the tenmat.matrix.  </p>
+<pre><code class="julia-repl">julia&gt; size(tenmat)
+(42,72)
+
+julia&gt; size(tenmat,2)
+72
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L86-L98' class='documenter-source'>source</a><br></p>
+<p><a id='Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}' href='#Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}'>#</a>
+<strong><code>Base.setindex!</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>setindex!(tenmat::Tenmat, args...)
+</code></pre>
+
+<p>Expands <code>setindex!</code> by tenmat.matrix.  </p>
+<pre><code class="julia-repl">julia&gt; setindex!(tenmat, 100, 2, 6);
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L101-L109' class='documenter-source'>source</a><br></p>
+<p><a id='Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}' href='#Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}'>#</a>
+<strong><code>Base.getindex</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>getindex(tenmat::Tenmat, args...)
+</code></pre>
+
+<p>Expands <code>getindex</code> by tenmat.matrix.  </p>
+<pre><code class="julia-repl">julia&gt; getindex(tenmat, 2, 6)
+100
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L112-L121' class='documenter-source'>source</a><br></p>
+<p><a id='Base.similar-Tuple{TensorMatrices_lemon.Tenmat}' href='#Base.similar-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
+<strong><code>Base.similar</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>similar
+</code></pre>
+
+<p>similar</p>
+<p><strong>Examples</strong></p>
+<pre><code class="julia">A = rand(4,7,6)
+tenmat = Tenmat(A,[3,1],[2])
+similar(tenmat, Int)
+similar(tenmat, Int, (5,2,7))
+similar(tenmat, Int, [1,3],[2])
+similar(tenmat, Int, [4,2,5], [1,3], (2,4,3,1,6))
+similar(tenmat)
+similar(tenmat, (5,2,7))
+similar(tenmat, [1,3],[2])
+B = similar(tenmat, [4,2,5], [1,3], (2,4,3,1,6))
+size(B)
+
+# output
+
+(24,6)
+
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L124-L149' class='documenter-source'>source</a><br></p>
+<p><a id='Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}' href='#Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
+<strong><code>Base.ndims</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>ndims(tenmat::Tenmat)
+</code></pre>
+
+<p>Return the original dimension of tenmat, from <code>tensorsize</code>.  </p>
+<pre><code class="julia">A = Array(reshape(1:3024, 4,7,2,9,6)) 
+tenmat = Tenmat(A,[5,2],[3,4,1])
+ndims(tenmat)
+
+# output
+
+5
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L167-L182' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.tensorSize-Tuple{TensorMatrices_lemon.Tenmat}' href='#TensorMatrices_lemon.tensorSize-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
+<strong><code>TensorMatrices_lemon.tensorSize</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>tensorSize(tenmat::Tenmat)
+</code></pre>
+
+<p>Return the tensorsize.  </p>
+<pre><code class="julia-repl">julia&gt; tensorSize(tenmat)
+(4,7,2,9,6)
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L185-L194' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.getMatrix-Tuple{TensorMatrices_lemon.Tenmat}' href='#TensorMatrices_lemon.getMatrix-Tuple{TensorMatrices_lemon.Tenmat}'>#</a>
+<strong><code>TensorMatrices_lemon.getMatrix</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>getMatrix(tenmat::Tenmat)
+</code></pre>
+
+<p>Return the matrix.  </p>
+<pre><code class="julia">A = Array(reshape(1:18, 3, 2, 3))
+tenmat = Tenmat(A,[3,1],[2])
+getMatrix(tenmat)
+
+# output
+
+9×2 Array{Int64,2}:
+  1   4
+  7  10
+ 13  16
+  2   5
+  8  11
+ 14  17
+  3   6
+  9  12
+ 15  18
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L199-L222' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.tensor2tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}' href='#TensorMatrices_lemon.tensor2tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}'>#</a>
+<strong><code>TensorMatrices_lemon.tensor2tenmat</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>tensor2tenmat{T,N}(tensor::Array{T,N}, rowindex::Vector{Int}, colindex::Vector{Int})
+</code></pre>
+
+<p>Convert tensor to tenmat.  </p>
+<p><strong>examples</strong></p>
+<pre><code class="julia-repl">julia&gt; A = rand(3,5,3,2,6);
+
+julia&gt; tenmatA = tensor2tenmat(A,[3,5,2],[4,1]);
+
+julia&gt; size(getMatrix(tenmatA))
+(90,6)
+
+julia&gt; tensorSize(tenmatA)
+(3,5,3,2,6)
+
+
+julia&gt; B = Array(reshape(1:10,2,5));
+
+julia&gt; tenmatB = tensor2tenmat(B,[2],[1]);
+
+julia&gt; tenmatB.matrix == transpose(B)
+true
+
+julia&gt; tensorSize(tenmatB)
+(2,5)
+
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L240-L270' class='documenter-source'>source</a><br></p>
+<p><a id='TensorMatrices_lemon.tenmat2tensor-Tuple{TensorMatrices_lemon.Tenmat{T}}' href='#TensorMatrices_lemon.tenmat2tensor-Tuple{TensorMatrices_lemon.Tenmat{T}}'>#</a>
+<strong><code>TensorMatrices_lemon.tenmat2tensor</code></strong> &mdash; <em>Method</em>.</p>
+<pre><code>tenmat2tensor{T}(tenmat::Tenmat{T})
+</code></pre>
+
+<p>Convert tenmat back to the tensor.  </p>
+<p><strong>examples</strong></p>
+<pre><code class="julia-repl">julia&gt; A = rand(3,5,3,2,8);
+
+julia&gt; tenmatA = tensor2tenmat(A,[3,5,2],[4,1]);
+
+julia&gt; back2A = tenmat2tensor(tenmatA);
+
+julia&gt; A == back2A
+true
+</code></pre>
+
+<pre><code class="julia">B = rand(8,6,7,5,8,5,3,8)
+tenmatB = tensor2tenmat(B,[1,7,3,2,6],[5,8,4])
+back2B = tenmat2tensor(tenmatB)
+check = true
+for a=1:8, b=1:6, c=1:7, d=1:5, e=1:8, f=1:5, g=1:3, h=1:8
+    back2B[a,b,c,d,e,f,g,h] == B[a,b,c,d,e,f,g,h] || check * false
+end
+check
+
+# output
+
+true
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/yoyoyoju/TensorMatrices_lemon/tree/ba09bd942c968014d5fbc7837b317631ee8bdd51/src/tenmat.jl#L305-L336' class='documenter-source'>source</a><br></p>
+<p><a id='index-1'></a></p>
+<h2 id="index">index</h2>
+<ul>
+<li><a href=".#TensorMatrices_lemon"><code>TensorMatrices_lemon</code></a></li>
+<li><a href=".#TensorMatrices_lemon.Tenmat-Tuple{Array{T,2}}"><code>TensorMatrices_lemon.Tenmat</code></a></li>
+<li><a href=".#TensorMatrices_lemon.Tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}"><code>TensorMatrices_lemon.Tenmat</code></a></li>
+<li><a href=".#TensorMatrices_lemon.Tenmat"><code>TensorMatrices_lemon.Tenmat</code></a></li>
+<li><a href=".#Base.getindex-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}"><code>Base.getindex</code></a></li>
+<li><a href=".#Base.ndims-Tuple{TensorMatrices_lemon.Tenmat}"><code>Base.ndims</code></a></li>
+<li><a href=".#Base.setindex!-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}"><code>Base.setindex!</code></a></li>
+<li><a href=".#Base.similar-Tuple{TensorMatrices_lemon.Tenmat}"><code>Base.similar</code></a></li>
+<li><a href=".#Base.size-Tuple{TensorMatrices_lemon.Tenmat,Vararg{Any,N}}"><code>Base.size</code></a></li>
+<li><a href=".#TensorMatrices_lemon.getMatrix-Tuple{TensorMatrices_lemon.Tenmat}"><code>TensorMatrices_lemon.getMatrix</code></a></li>
+<li><a href=".#TensorMatrices_lemon.tenmat2tensor-Tuple{TensorMatrices_lemon.Tenmat{T}}"><code>TensorMatrices_lemon.tenmat2tensor</code></a></li>
+<li><a href=".#TensorMatrices_lemon.tensor2tenmat-Tuple{Array{T,N},Array{Int64,1},Array{Int64,1}}"><code>TensorMatrices_lemon.tensor2tenmat</code></a></li>
+<li><a href=".#TensorMatrices_lemon.tensorSize-Tuple{TensorMatrices_lemon.Tenmat}"><code>TensorMatrices_lemon.tensorSize</code></a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/yoyoyoju/TensorMatrices_lemon" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script src="./js/theme.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="./assets/mathjaxhelper.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.16.3
+Build Date UTC : 2017-06-16 15:51:06
+-->
