@@ -1,6 +1,6 @@
 # TensorMatrices_lemon Module
 
-[pages](https://yoyoyoju.github.io/TensorMatricex_lemon.jl/latest)
+[pages](https://yoyoyoju.github.io/TensorMatrices_lemon/latest)
 
 ```@docs
 TensorMatrices_lemon
