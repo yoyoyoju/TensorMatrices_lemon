@@ -2,6 +2,7 @@ using TensorMatrices_lemon
 using Base.Test
 
 # creating a tenmat
+#= 
 		"""    
 			matrix = rand(6,8)
 			rowindex = [3,1]
@@ -39,4 +40,4 @@ using Base.Test
 	
 	
 """
-@test 1 == 2
+=#

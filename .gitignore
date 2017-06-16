@@ -13,3 +13,4 @@
 
 # ignore all files in the docs/build/ directory
 docs/build/
+docs/site/
