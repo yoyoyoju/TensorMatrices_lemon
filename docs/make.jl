@@ -6,7 +6,7 @@ makedocs()
 # 
  deploydocs(
 			deps = Deps.pip("mkdocs", "python-markdown-math"),
- 		  repo = "github.com/yoyoyoju/TensorMatrices_lemon.git",
+ 		  repo = "github.com/yoyoyoju/TensorMatrices_lemon.jl.git",
  		  julia = "0.5",
  		  osname = "osx"
 		  )

@@ -1,6 +1,6 @@
 site_name:        TensorMatrices_lemon.jl
-repo_url:         https://github.com/yoyoyoju/TensorMatrices_lemon
-site_description: Description...
+repo_url:         https://github.com/yoyoyoju/TensorMatrices_lemon.jl
+site_description: TensorMatrices
 site_author:      yoyoyoju
 
 theme: readthedocs
